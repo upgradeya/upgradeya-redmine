@@ -1,0 +1,10 @@
+passenger:
+  build: containers/passenger
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - containers/passenger/redmine:/home/app/redmine
+  command: /sbin/my_init --enable-insecure-key
+        
+# vi: set tabstop=2 expandtab :
