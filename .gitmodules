@@ -1,0 +1,3 @@
+[submodule "containers/passenger/redmine"]
+	path = containers/passenger/redmine
+	url = https://github.com/redmine/redmine.git
