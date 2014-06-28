@@ -6,5 +6,12 @@ passenger:
   volumes:
     - containers/passenger/redmine:/home/app/redmine
   command: /sbin/my_init --enable-insecure-key
+  links:
+    - mariadb
+mariadb:
+  image: paintedfox/mariadb
+  environment:
+    USER: super
+    PASS: ultra_pass1111
         
 # vi: set tabstop=2 expandtab :

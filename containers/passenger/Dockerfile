@@ -11,28 +11,28 @@ ENV HOME /root
 
 # ============ Custom build code steps here =============
 
-# Start nginx
-RUN rm -f /etc/service/nginx/down
-
-# Configure webapp
-ADD redmine.conf /etc/nginx/sites-enabled/redmine.conf
-RUN mkdir /home/app/redmine
-
 # Requirements to build gems for redmine
 RUN apt-get update
 # nokogirl
 RUN apt-get -y install libxslt1-dev libxml2-dev
 # rmagick
 RUN apt-get -y install imagemagick libmagickwand-dev
+# mysql
+RUN apt-get -y install libmysqlclient-dev
 
-# Add the Gemfile for building gems for redmine
-ADD redmine/Gemfile /home/app/redmine/Gemfile
+# Enable nginx
+RUN rm -f /etc/service/nginx/down
 
-# Build gems
-RUN cd /home/app/redmine && bundle install
+# Configure webapp
+ADD redmine.conf /etc/nginx/sites-enabled/redmine.conf
+ADD redmine_vars.conf /etc/nginx/main.d/redmine_vars.conf
+RUN mkdir /home/app/redmine
 
 # Add redmine project
 ADD redmine /home/app/redmine
+
+# Build gems
+RUN cd /home/app/redmine && bundle install
 
 # =======================================================
 
