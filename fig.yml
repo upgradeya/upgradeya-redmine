@@ -10,8 +10,5 @@ passenger:
     - mariadb
 mariadb:
   image: paintedfox/mariadb
-  environment:
-    USER: super
-    PASS: ultra_pass1111
         
 # vi: set tabstop=2 expandtab :
