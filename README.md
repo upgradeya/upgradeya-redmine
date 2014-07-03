@@ -11,9 +11,9 @@ The project uses the [fig](http://orchardup.github.io/fig/) to orchestrate docke
 - [Docker](http://docs.docker.com/installation/#installation)
 - [Fig](http://orchardup.github.io/fig/install.html)
 
-## Building
+## Build and run
 
-To build the environment all that needs to be done is `fig build` at the root of the project.
+To build and run the environment all that needs to be done is `fig up -d` at the root of the project.
 
 ## Configuration
 
@@ -22,6 +22,8 @@ For the initial Redmine configuration, the initialize_redmine.sh script should b
 ### Automatic Configuration
 
 `./script/initialize_redmine.sh`
+
+At this point http://localhost should show a running Redmine instance.
 
 If you receive any errors then you can remove the mariadb container with `fig stop mariadb && fig rm mariadb && fig up -d` and try the manual configuration process.
 
