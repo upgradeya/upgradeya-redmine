@@ -17,6 +17,16 @@ To build the environment all that needs to be done is `fig build` at the root of
 
 ## Configuration
 
+For the initial Redmine configuration, the initialize_redmine.sh script should be used.  For documentation purposes the initial configuration is described in the Manual Configuration section.
+
+### Automatic Configuration
+
+`./script/initialize_redmine.sh`
+
+If you receive any errors then you can remove the mariadb container with `fig stop mariadb && fig rm mariadb && fig up -d` and try the manual configuration process.
+
+### Manual Configuration
+
 After the containers are built, Redmine needs to be configured. First start containers to get the database password and username from the logs.  Use `fig up` to start the containers and then `docker ps` to get a list of all the running containers.  The container that says "paintedfox/mariadb:lastest" as the IMAGE name is the database container.  Show the log for the database by running `docker logs <CONTAINER_ID>` where "<CONTAINER_ID>" is your container id will look something like "16bebb57262a".  The result should look somthing like this.
 
 ```
