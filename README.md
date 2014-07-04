@@ -11,13 +11,17 @@ The project uses the [fig](http://orchardup.github.io/fig/) to orchestrate docke
 - [Docker](http://docs.docker.com/installation/#installation)
 - [Fig](http://orchardup.github.io/fig/install.html)
 
-## Build and run
+## Quick Start
 
-To build and run the environment all that needs to be done is `fig up -d` at the root of the project.
+The first time this project is started you should use the `initialize_redmine.sh` script.  For all subsequent runs you should just use fig, `fig up -d`.
+
+## Running and stoping containers
+
+After running `initialize_redmine.sh` your Redmine instance should be running.  If you want to top the containers then run `fig stop`.  If you want to start it up again, use `fig up -d`.
 
 ## Configuration
 
-For the initial Redmine configuration, the initialize_redmine.sh script should be used.  For documentation purposes the initial configuration is described in the Manual Configuration section.
+For the initial Redmine configuration, the `initialize_redmine.sh` script should be used.  For documentation purposes the initial configuration is described in the Manual Configuration section.
 
 ### Automatic Configuration
 
