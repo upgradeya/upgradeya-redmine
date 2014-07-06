@@ -28,7 +28,7 @@ fig build
 fig up -d
 
 # Get mariadb container information
-mariadb_container_id=$(docker ps | grep -e 'p[ ]*figredmine_mariadb_1,' | awk '{print $1}')
+mariadb_container_id=$(fig ps -q mariadb)
 mariadb_container_ip=$(docker inspect -f '{{ .NetworkSettings.IPAddress }}' $mariadb_container_id)
 mariadb_super_password=$(docker logs $mariadb_container_id | grep MARIADB_PASS | awk '{split($0,a,"="); print a[2]}')
 echo "Found mariadb container $mariadb_container_id at $mariadb_container_ip with super user password $mariadb_super_password"
