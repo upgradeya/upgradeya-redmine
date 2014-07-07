@@ -20,10 +20,14 @@ RUN apt-get -y install imagemagick libmagickwand-dev
 # mysql
 RUN apt-get -y install libmysqlclient-dev
 
+# Build gems
+ADD redmine/Gemfile /home/app/redmine/Gemfile
+RUN cd /home/app/redmine && bundle install
+
 # Add redmine project
 ADD redmine /home/app/redmine
 
-# Build gems
+# Build gems (again after adding database.yml)
 RUN cd /home/app/redmine && bundle install
 
 # Enable nginx
