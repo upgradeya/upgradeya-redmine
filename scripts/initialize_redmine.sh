@@ -40,6 +40,8 @@ echo "Creating Redmine user"
 fig run --rm mariadb mysql -u super -p$mariadb_super_password -h $mariadb_container_ip -e 'CREATE USER '"'"'redmine'"'"'@'"'"'172.%'"'"' IDENTIFIED BY '"'"$password"'"''
 fig run --rm mariadb mysql -u super -p$mariadb_super_password -h $mariadb_container_ip -e 'GRANT ALL PRIVILEGES ON redmine_production.* TO '"'"'redmine'"'"'@'"'"'172.%'"'"''
 
+echo "Building Gemfile.lock"
+fig run --rm passenger bash -c 'cd /home/app/redmine; bundle install --without development test'
 echo "Creating Redmine database"
 fig run --rm passenger bash -c 'cd /home/app/redmine; (export RAILS_ENV=production && rake db:create)'
 echo "Migrating database"
