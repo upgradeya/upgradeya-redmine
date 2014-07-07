@@ -13,6 +13,8 @@ The project uses the [fig](http://orchardup.github.io/fig/) to orchestrate docke
 
 ## Quick Start
 
+Use `git clone --recursive` to download the project because of the Redmine submodule.
+
 The first time this project is started you should use the `initialize_redmine.sh` script.  For all subsequent runs you should just use fig, `fig up -d`.
 
 ## Running and stoping containers
