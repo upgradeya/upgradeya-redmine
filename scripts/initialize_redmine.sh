@@ -51,5 +51,9 @@ fig run --rm passenger bash -c 'cd /home/app/redmine; rake generate_secret_token
 echo "Loading default data"
 fig run --rm passenger bash -c 'cd /home/app/redmine; (export RAILS_ENV=production && rake redmine:load_default_data)'
 
+# Create cache directory
+mkdir redmine/tmp/cache
+chmod 777 redmine/tmp/cache
+
 # Restart passenger
 fig up -d
