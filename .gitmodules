@@ -1,3 +1,6 @@
 [submodule "containers/passenger/redmine"]
 	path = containers/passenger/redmine
 	url = https://github.com/redmine/redmine.git
+[submodule ".decompose/environment"]
+	path = .decompose/environment
+	url = https://github.com/dmp1ce/decompose-redmine.git

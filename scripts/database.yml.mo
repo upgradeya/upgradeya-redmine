@@ -8,8 +8,8 @@ production: &default
   database: redmine_production
   host: <%= ENV.fetch('MARIADB_1_PORT_3306_TCP_ADDR', 'localhost') %> 
   port: <%= ENV.fetch('MARIADB_1_PORT_3306_TCP_PORT', '3306') %>
-  username: redmine
-  password: "<password>"
+  username: "{{PROJECT_DB_USER}}"
+  password: "{{PROJECT_DB_PASSWORD}}"
   encoding: utf8
 
 development:
