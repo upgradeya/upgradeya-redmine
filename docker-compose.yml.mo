@@ -5,6 +5,7 @@ passenger:
     - mariadb
   volumes:
     - ./containers/passenger/redmine:/home/app/redmine
+    - ./containers/passenger/redmine_plugins:/home/app/redmine/plugins
   environment:
     - VIRTUAL_HOST={{PROJECT_NGINX_PROXY_VIRTUAL_HOSTS}}
 #  volumes_from:

@@ -20,8 +20,14 @@ RUN apt-get -y install imagemagick libmagickwand-dev
 # mysql
 RUN apt-get -y install libmysqlclient-dev
 
-# Add redmine project
-ADD redmine /home/app/redmine
+# COPY redmine project
+COPY redmine /home/app/redmine
+
+# COPY plugins
+COPY redmine_plugins/. /home/app/redmine/plugins
+# Create 'plugin_assets' directory
+RUN mkdir -p /home/app/redmine/public/plugin_assets && \
+  chmod 777 /home/app/redmine/public/plugin_assets
 
 # Build gems
 RUN cd /home/app/redmine && bundle install --without development test
@@ -30,8 +36,8 @@ RUN cd /home/app/redmine && bundle install --without development test
 RUN rm -f /etc/service/nginx/down
 
 # Configure nginx
-ADD redmine.conf /etc/nginx/sites-enabled/redmine.conf
-ADD redmine_vars.conf /etc/nginx/main.d/redmine_vars.conf
+COPY redmine.conf /etc/nginx/sites-enabled/redmine.conf
+COPY redmine_vars.conf /etc/nginx/main.d/redmine_vars.conf
 RUN rm /etc/nginx/sites-enabled/default
 
 # =======================================================
