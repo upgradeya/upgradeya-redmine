@@ -1,5 +1,4 @@
-# Redmine fig/docker environment README
-
+# UpgradeYa's Redmine decompose environment
 
 This project is designed to allow a developer to quickly get a Redmine environment setup for both local development and production on a single server.
 
