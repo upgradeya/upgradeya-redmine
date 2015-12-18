@@ -4,7 +4,8 @@
 # sure you lock down to a specific version, not to `latest`!
 # See https://github.com/phusion/passenger-docker/blob/master/Changelog.md for
 # a list of version numbers.
-FROM phusion/passenger-ruby20:0.9.11
+# OR live on the wild side and use latest
+FROM phusion/passenger-ruby20
 
 # Set correct environment variables.
 ENV HOME /root
@@ -22,6 +23,7 @@ RUN apt-get -y install libmysqlclient-dev
 
 # COPY redmine project
 COPY redmine /home/app/redmine
+COPY database.yml /home/app/redmine/config
 
 # COPY plugins
 COPY redmine_plugins/. /home/app/redmine/plugins
@@ -39,6 +41,9 @@ RUN rm -f /etc/service/nginx/down
 COPY redmine.conf /etc/nginx/sites-enabled/redmine.conf
 COPY redmine_vars.conf /etc/nginx/main.d/redmine_vars.conf
 RUN rm /etc/nginx/sites-enabled/default
+
+# Copy generated version file
+COPY version.txt /home/app/redmine/public
 
 # =======================================================
 
