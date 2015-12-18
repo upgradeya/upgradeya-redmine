@@ -3,13 +3,16 @@ passenger:
   command: /sbin/my_init --enable-insecure-key
   links:
     - mariadb
+{{#DEVELOPMENT}}
   volumes:
     - ./containers/passenger/redmine:/home/app/redmine
     - ./containers/passenger/redmine_plugins:/home/app/redmine/plugins
+{{/DEVELOPMENT}}
   environment:
     - VIRTUAL_HOST={{PROJECT_NGINX_PROXY_VIRTUAL_HOSTS}}
-#  volumes_from:
-#    - source
+{{#PRODUCTION}}
+  restart: always
+{{/PRODUCTION}}
 mariadb:
   image: mariadb
   environment:
@@ -21,13 +24,5 @@ mariadb:
 {{#PRODUCTION}}
   restart: always
 {{/PRODUCTION}}
-# Data containers
-#source:
-#  build: containers/source/.
-#  volumes:
-#    - containers/passenger/redmine:/home/app/redmine
-#  command: "true"
-#  labels:
-#    - "data_container=true"
         
 # vi: set tabstop=2 expandtab syntax=yaml:
