@@ -1,0 +1,8 @@
+#DECOMPOSE_MYPROJECT_PROCESSES+=( 'project_specific_process' ) 
+#
+#_decompose-process-project_specific_process() {
+#  echo "custom process for 'my project'"
+#}
+#_decompose-process-project_specific_process_help() {
+#  echo "  Custom build"
+#}
