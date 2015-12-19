@@ -27,9 +27,6 @@ COPY database.yml /home/app/redmine/config
 
 # COPY plugins
 COPY redmine_plugins/. /home/app/redmine/plugins
-# Create 'plugin_assets' directory
-RUN mkdir -p /home/app/redmine/public/plugin_assets && \
-  chmod 777 /home/app/redmine/public/plugin_assets
 
 # Build gems
 RUN cd /home/app/redmine && bundle install --without development test
