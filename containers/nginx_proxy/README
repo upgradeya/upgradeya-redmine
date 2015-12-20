@@ -1,0 +1,13 @@
+Set the following files in order to configure nginx-proxy with VIRTUAL_HOST configuration.
+They will be used when 'decompose up' is run.
+
+proxy_virtual_host.conf
+proxy_virtual_host.key
+proxy_virtual_host.crt
+proxy_virtual_host.dhparam.pem
+
+The default nginx-proxy settings can also be changed on a proxy wide basis using the following file:
+
+proxy.conf
+
+BEWARE, changing this file might effect other sites using the proxy. Try not use this file if possible.

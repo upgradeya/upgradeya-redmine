@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Run commands necessary to load developer keys
+for key in public_keys/*; do
+  test -f $key && gpg --import $key
+done
+
+# This script should always return a success code
+exit 0

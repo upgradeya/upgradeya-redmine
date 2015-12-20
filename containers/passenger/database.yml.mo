@@ -6,7 +6,7 @@
 production: &default
   adapter: mysql2
   database: "{{PROJECT_DB_DATABASE}}"
-  host: <%= ENV.fetch('MARIADB_1_PORT_3306_TCP_ADDR', 'localhost') %> 
+  host: <%= ENV.fetch('MARIADB_1_PORT_3306_TCP_ADDR', 'localhost') %>
   port: <%= ENV.fetch('MARIADB_1_PORT_3306_TCP_PORT', '3306') %>
   username: "{{PROJECT_DB_USER}}"
   password: "{{PROJECT_DB_PASSWORD}}"

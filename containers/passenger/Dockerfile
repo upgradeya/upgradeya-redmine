@@ -44,6 +44,16 @@ COPY version.txt /home/app/redmine/public
 
 # =======================================================
 
+# Create redmine volumes
+RUN install -dm777 /home/app/redmine/tmp && \
+  install -dm777 /home/app/redmine/log && \
+  install -dm777 /home/app/redmine/files \
+  install -dm777 /home/app/redmine/public/plugin_assets
+VOLUME /home/app/redmine/tmp
+VOLUME /home/app/redmine/log
+VOLUME /home/app/redmine/files
+VOLUME /home/app/redmine/public/plugin_assets
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
