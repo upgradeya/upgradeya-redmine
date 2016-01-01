@@ -36,11 +36,11 @@ RUN chmod +x /home/duply/load_developer_keys
 
 # Setup volumes for backup
 RUN install -dm777 /home/duply/backup && \
-  install -dm777 /home/duply/backup_data && \
+  install -dm777 /home/duply/backup_config && \
   install -dm777 /home/duply/.cache/duplicity && \
   install -dm777 {{PROJECT_BACKUP_SOURCE}}/sql_backup
 VOLUME /home/duply/backup
-VOLUME /home/duply/backup_data
+VOLUME /home/duply/backup_config
 VOLUME /home/duply/.cache/duplicity
 VOLUME {{PROJECT_BACKUP_SOURCE}}/sql_backup
 
