@@ -11,6 +11,7 @@ passenger:
 {{/DEVELOPMENT}}
   environment:
     - VIRTUAL_HOST={{PROJECT_NGINX_PROXY_VIRTUAL_HOSTS}}
+    - PASSENGER_APP_ENV={{PROJECT_ENVIRONMENT}}
   log_driver: {{PROJECT_DOCKER_LOG_DRIVER}}
 {{#PRODUCTION}}
   restart: always
