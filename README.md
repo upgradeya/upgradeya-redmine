@@ -18,7 +18,7 @@ Create the file `.decompose/elements` and add the following data.
 
 ```
 # Include constant elements
-#source $(_decompose-project-root)/elements
+source $(_decompose-project-root)/elements
 
 PROJECT_ENVIRONMENT="development"
 PROJECT_NGINX_VIRTUAL_HOST="localhost"
