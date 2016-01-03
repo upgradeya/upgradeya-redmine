@@ -1,8 +1,72 @@
-#DECOMPOSE_MYPROJECT_PROCESSES+=( 'project_specific_process' ) 
-#
-#_decompose-process-project_specific_process() {
-#  echo "custom process for 'my project'"
-#}
-#_decompose-process-project_specific_process_help() {
-#  echo "  Custom build"
-#}
+DECOMPOSE_PROCESSES+=( 'sync_legacy_data' 'import_legacy_data' 'update_db' )
+
+_decompose-process-sync_legacy_data() {
+  echo "Syncing legacy data..."
+
+  local legacy_files_dir="$(_decompose-project-root)/legacy_files"
+
+  # Create directory to sync files
+  mkdir -p "$legacy_files_dir"
+
+  local mysqluser="$PROJECT_LEGACY_DB_USER"
+  local mysqlpassword="$PROJECT_LEGACY_DB_PASSWORD"
+
+  # Sync database backup
+  ssh david@redmine.upgradeya.com "mysqldump -u$mysqluser -p$mysqlpassword redmine | gzip > mysql.sql.gz"
+  scp david@redmine.upgradeya.com:mysql.sql.gz "$legacy_files_dir" 
+
+  # Sync files
+  rsync -r david@redmine.upgradeya.com:/home/redmine/capistrano/shared/files "$legacy_files_dir"
+}
+_decompose-process-sync_legacy_data_help() {
+  echo "  Sync legacy data locally."
+}
+
+_decompose-process-import_legacy_data() {
+  echo "Importing legacy data..."
+
+  local legacy_files_dir="$(_decompose-project-root)/legacy_files"
+  local sql_file="mysql.sql.gz"
+
+  if [ ! -e "$legacy_files_dir/$sql_file" ]; then
+    echo "File '$sql_file' does not exist"
+    exit 1
+  fi
+
+  # Get the name of the database container
+  local cid=$(docker-compose ps -q mariadb)
+
+  # Copy file to container /tmp
+  docker cp "$legacy_files_dir/$sql_file" $cid:/tmp
+
+  local password_param=""
+  if [ "$PROJECT_DB_PASSWORD" ]; then
+    local password_param="-p$PROJECT_DB_PASSWORD"
+  fi
+
+  # Import SQL
+  docker exec $cid bash -c "gzip -d < /tmp/$sql_file | mysql -u $PROJECT_DB_USER $password_param $PROJECT_DB_DATABASE"
+
+  # Delete /tmp file
+  docker exec $cid rm /tmp/$sql_file
+
+  # Get the name of the database container
+  local cid=$(docker-compose ps -q passenger)
+  docker cp "$legacy_files_dir/files/." $cid:/home/app/redmine/files
+}
+_decompose-process-import_legacy_data_help() {
+  echo "  Import legacy data which is already synced locally"
+}
+
+_decompose-process-update_db() {
+  local cid=$(docker-compose ps -q passenger)
+  docker exec -it $cid bash -c "cd /home/app/redmine && \
+    bundle exec rake db:migrate RAILS_ENV=$PROJECT_ENVIRONMENT && \
+    bundle exec rake redmine:plugins:migrate RAILS_ENV=$PROJECT_ENVIRONMENT"
+}
+_decompose-process-update_db_help() {
+  echo "  Run database update as define here:"
+  echo "  http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade"
+}
+
+# vim:syntax=sh
