@@ -6,4 +6,4 @@
 	url = https://github.com/dmp1ce/decompose-redmine.git
 [submodule "containers/passenger/redmine_plugins/redmine-contracts-with-time-tracking-plugin"]
 	path = containers/passenger/redmine_plugins/contracts
-	url = https://github.com/sbraford/redmine-contracts-with-time-tracking-plugin.git
+	url = https://github.com/upgradeya/redmine-contracts-with-time-tracking-plugin.git
