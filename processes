@@ -1,4 +1,4 @@
-DECOMPOSE_PROCESSES+=( 'sync_legacy_data' 'import_legacy_data' 'update_db' )
+DECOMPOSE_PROCESSES+=( 'sync_legacy_data' 'import_legacy_data' )
 
 _decompose-process-sync_legacy_data() {
   echo "Syncing legacy data..."
@@ -56,17 +56,6 @@ _decompose-process-import_legacy_data() {
 }
 _decompose-process-import_legacy_data_help() {
   echo "  Import legacy data which is already synced locally"
-}
-
-_decompose-process-update_db() {
-  local cid=$(docker-compose ps -q passenger)
-  docker exec -it $cid bash -c "cd /home/app/redmine && \
-    bundle exec rake db:migrate RAILS_ENV=$PROJECT_ENVIRONMENT && \
-    bundle exec rake redmine:plugins:migrate RAILS_ENV=$PROJECT_ENVIRONMENT"
-}
-_decompose-process-update_db_help() {
-  echo "  Run database update as define here:"
-  echo "  http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade"
 }
 
 # vim:syntax=sh
