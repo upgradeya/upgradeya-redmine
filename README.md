@@ -26,6 +26,7 @@ PROJECT_NGINX_VIRTUAL_HOST_ALTS=""
 
 # Database settings
 PROJECT_DB_DATABASE="redmine_db"
+PROJECT_DB_TEST_DATABASE="redmine_test_db"
 PROJECT_DB_USER="redmine_user"
 PROJECT_DB_PASSWORD="mypassword_db"
 PROJECT_DB_ROOT_PASSWORD="rootpassword_db"
