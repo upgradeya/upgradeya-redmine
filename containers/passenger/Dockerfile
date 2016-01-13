@@ -59,4 +59,6 @@ VOLUME /home/app/redmine/public/plugin_assets
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+WORKDIR /home/app/redmine
+
 # vi: set tabstop=4 expandtab :
