@@ -1,3 +1,4 @@
+# https://github.com/phusion/passenger-docker#adding_web_app
 server {
   server_name {{PROJECT_NGINX_VIRTUAL_HOST}};
   root /home/app/redmine/public;
@@ -14,7 +15,7 @@ server {
   # If this is a Ruby app, specify a Ruby version:
   #passenger_ruby /usr/bin/ruby2.1;
   # For Ruby 2.0
-  passenger_ruby /usr/bin/ruby2.0;
+  #passenger_ruby /usr/bin/ruby2.0;
   # For Ruby 1.9.3 (you can ignore the "1.9.1" suffix)
   #passenger_ruby /usr/bin/ruby1.9.1;
 }
@@ -28,6 +29,5 @@ server {
   return 301 $scheme://{{PROJECT_NGINX_VIRTUAL_HOST}}$request_uri;
 }
 {{/PROJECT_NGINX_VIRTUAL_HOST_ALTS}}
-
 
 # vim:syntax=nginx

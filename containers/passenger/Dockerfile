@@ -5,7 +5,7 @@
 # See https://github.com/phusion/passenger-docker/blob/master/Changelog.md for
 # a list of version numbers.
 # OR live on the wild side and use latest
-FROM phusion/passenger-ruby20
+FROM phusion/passenger-ruby22
 
 # Set correct environment variables.
 ENV HOME /root
