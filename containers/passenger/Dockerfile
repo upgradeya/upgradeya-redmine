@@ -1,40 +1,15 @@
-# Using instructions from https://github.com/phusion/passenger-docker
-
-# Use phusion/passenger-full as base image. To make your builds reproducible, make
-# sure you lock down to a specific version, not to `latest`!
-# See https://github.com/phusion/passenger-docker/blob/master/Changelog.md for
-# a list of version numbers.
-# OR live on the wild side and use latest
-FROM phusion/passenger-ruby22
-
-# Set correct environment variables.
-ENV HOME /root
-
-# ============ Custom build code steps here =============
-
-# Requirements to build gems for redmine
-RUN apt-get update
-# nokogirl
-RUN apt-get -y install libxslt1-dev libxml2-dev
-# rmagick
-RUN apt-get -y install imagemagick libmagickwand-dev
-# mysql
-RUN apt-get -y install libmysqlclient-dev
+FROM dmp1ce/passenger-redmine
+MAINTAINER David Parrish <daveparrish@tutanota.com>
 
 # COPY redmine project
 COPY redmine /home/app/redmine
-COPY database.yml /home/app/redmine/config
-COPY configuration.yml /home/app/redmine/config
-COPY secrets.yml /home/app/redmine/config
+COPY *.yml /home/app/redmine/config/
 
 # COPY plugins
 COPY redmine_plugins/. /home/app/redmine/plugins
 
 # Build gems
 RUN cd /home/app/redmine && bundle install --without development test
-
-# Enable nginx
-RUN rm -f /etc/service/nginx/down
 
 # Configure nginx
 COPY redmine.conf /etc/nginx/sites-enabled/redmine.conf
