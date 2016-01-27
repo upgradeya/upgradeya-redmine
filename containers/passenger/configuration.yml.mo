@@ -200,6 +200,13 @@ default:
 # specific configuration options for production environment
 # that overrides the default ones
 production:
+  smtp_settings:
+    address: {{PROJECT_SMTP_HOST}}
+    port: 587
+    domain: {{PROJECT_SMTP_DOMAIN}}
+    authentication: :login
+    user_name: "{{PROJECT_SMTP_USER}}"
+    password: "{{PROJECT_SMTP_PASSWORD}}"
 
 # specific configuration options for development environment
 # that overrides the default ones
