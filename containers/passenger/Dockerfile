@@ -8,8 +8,11 @@ COPY *.yml /home/app/redmine/config/
 # COPY plugins
 COPY redmine_plugins/. /home/app/redmine/plugins
 
+# Remove default Gemfile.lock
 # Build gems
-RUN cd /home/app/redmine && bundle install --without development test
+RUN cd /home/app/redmine && \
+rm Gemfile.lock && \
+bundle install --without development test
 
 # Configure nginx
 COPY redmine.conf /etc/nginx/sites-enabled/redmine.conf
