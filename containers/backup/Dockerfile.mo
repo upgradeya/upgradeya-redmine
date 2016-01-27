@@ -32,15 +32,15 @@ RUN mkdir -p /srv/http/sql_backup && chmod 777 /srv/http/sql_backup
 # Add GPG keys for encrypting config tars
 COPY public_keys /home/duply/public_keys
 COPY load_developer_keys /home/duply/
-RUN chmod +x /home/duply/load_developer_keys
+RUN chmod a+rx /home/duply/load_developer_keys
 
 # Setup volumes for backup
 RUN install -dm777 /home/duply/backup && \
-  install -dm777 /home/duply/backup_config && \
+  install -dm777 /home/duply/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}} && \
   install -dm777 /home/duply/.cache/duplicity && \
   install -dm777 {{PROJECT_BACKUP_SOURCE}}/sql_backup
 VOLUME /home/duply/backup
-VOLUME /home/duply/backup_config
+VOLUME /home/duply/{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}
 VOLUME /home/duply/.cache/duplicity
 VOLUME {{PROJECT_BACKUP_SOURCE}}/sql_backup
 

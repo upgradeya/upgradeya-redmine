@@ -17,13 +17,14 @@ while true; do
     gpg_recipients=$gpg_recipients" -r ${key##*/}"
   done
 
+  local config_backup_dirname="{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}"
   if [ "${#public_keys[@]}" -gt "0" ]; then
     # Encrypt all config backups
-    gpg --yes --encrypt-files $gpg_recipients --trust-model always backup_config/*.gz
+    gpg --yes --encrypt-files $gpg_recipients --trust-model always $config_backup_dirname/*.gz
 
     # Send all encrypted config backups to target
     if [[ ! -z "{{PROJECT_BACKUP_CONFIG_TARGET}}" ]]; then
-      scp backup_config/*.gpg {{PROJECT_BACKUP_CONFIG_TARGET}}
+      scp $config_backup_dirname/*.gpg {{PROJECT_BACKUP_CONFIG_TARGET}}
     else
       echo "WARNING: Remote backup configuration TARGET is missing! Skipping remote backup of configuration files."
     fi
