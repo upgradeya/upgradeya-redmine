@@ -14,6 +14,9 @@ proxy:
   ports:
     - "443:443"
     - "80:80"
+{{#PRODUCTION}}
+  restart: always
+{{/PRODUCTION}}
 {{#PROJECT_LETSENCRYPT}}
 letsencrypt:
   image: {{PROJECT_NGINX_PROXY_LETSENCRYPT_IMAGE}}
@@ -26,4 +29,9 @@ letsencrypt:
     - /var/run/docker.sock:/var/run/docker.sock:ro
   volumes_from:
     - proxy
+{{#PRODUCTION}}
+  restart: always
+{{/PRODUCTION}}
 {{/PROJECT_LETSENCRYPT}}
+
+# vi: set tabstop=2 expandtab syntax=yaml:
