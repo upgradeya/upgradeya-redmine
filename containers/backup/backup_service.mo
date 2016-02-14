@@ -17,7 +17,7 @@ while true; do
     gpg_recipients=$gpg_recipients" -r ${key##*/}"
   done
 
-  local config_backup_dirname="{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}"
+  config_backup_dirname="{{PROJECT_BACKUP_CONFIG_BACKUP_DIRECTORY}}"
   if [ "${#public_keys[@]}" -gt "0" ]; then
     # Encrypt all config backups
     gpg --yes --encrypt-files $gpg_recipients --trust-model always $config_backup_dirname/*.gz
