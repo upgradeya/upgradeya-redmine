@@ -1,3 +1,3 @@
 # English strings go here for Rails i18n
 en:
-  field_remaining_hours: Remaing hours
+  field_remaining_hours: Remaing hours # from the old backlogs plugin
