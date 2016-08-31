@@ -1,4 +1,4 @@
-FROM dmp1ce/passenger-redmine:3.2-stable
+FROM dmp1ce/passenger-redmine:3.3-stable
 MAINTAINER David Parrish <daveparrish@tutanota.com>
 
 # COPY redmine project
