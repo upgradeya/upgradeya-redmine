@@ -14,3 +14,7 @@ The change log is available [on GitHub][2].
 ## v1.1.0
 
 * Update to version 3.3 of Redmine
+
+## v1.1.1
+
+* Updated the contracts plugin to v2.2
