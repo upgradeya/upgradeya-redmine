@@ -21,6 +21,16 @@ passenger:
 {{#PRODUCTION}}
   restart: always
 {{/PRODUCTION}}
+redmine_cron:
+  build: containers/passenger
+  volumes_from:
+    - passenger
+  links:
+    - mariadb
+  command: /opt/cron_service
+  environment:
+    TERM: dumb
+  log_driver: "{{PROJECT_DOCKER_LOG_DRIVER}}"
 mariadb:
   image: mariadb
   environment:

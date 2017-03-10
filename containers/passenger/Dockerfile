@@ -8,6 +8,10 @@ COPY *.yml /home/app/redmine/config/
 # COPY plugins
 COPY redmine_plugins/. /home/app/redmine/plugins
 
+# Add cron_service script
+COPY cron_service /opt/cron_service
+RUN chmod +x /opt/cron_service
+
 # Remove default Gemfile.lock
 # Build gems
 RUN cd /home/app/redmine && \

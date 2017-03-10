@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo 'Waiting 10 minutes for things to start up and settle down...'
+sleep 600
+
+# Wait every x number of seconds to run drupal cron
+wait_time_in_seconds=21600; # set to 6 hours
+while true; do
+  echo "Running redmine:recur_tasks"
+  cd /home/app/redmine && bundle exec rake RAILS_ENV=production redmine:recur_tasks
+  echo "Waiting '$wait_time_in_seconds' seconds for next cron"
+  sleep "$wait_time_in_seconds"
+done
