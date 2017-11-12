@@ -32,7 +32,7 @@ redmine_cron:
     TERM: dumb
   log_driver: "{{PROJECT_DOCKER_LOG_DRIVER}}"
 mariadb:
-  image: mariadb
+  image: mariadb:10.2.9
   environment:
     MYSQL_ROOT_PASSWORD: {{PROJECT_DB_ROOT_PASSWORD}}
     MYSQL_USER: {{PROJECT_DB_USER}}
