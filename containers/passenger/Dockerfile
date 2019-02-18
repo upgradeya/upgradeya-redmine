@@ -1,8 +1,7 @@
 FROM dmp1ce/passenger-redmine:3.3-stable
 MAINTAINER David Parrish <daveparrish@tutanota.com>
 
-# COPY redmine project
-COPY redmine /home/app/redmine
+# COPY redmine project configuration
 COPY *.yml /home/app/redmine/config/
 
 # COPY plugins
